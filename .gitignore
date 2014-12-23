@@ -41,3 +41,22 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+.idea/workspace-pc_uni.xml
+.idea/.name
+.idea/dataSources.ids
+.idea/dataSources.xml
+.idea/dictionaries/Patrick.xml
+.idea/dataSources.local.xml
+.idea/encodings.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/scopes/scope_settings.xml
+.idea/sqldialects.xml
+.idea/vcs.xml
+.idea/Wikigame_Websocket.iml
+.idea/workspace-PatrickKasperPC-2.xml
+.idea/workspace-PatrickKasperPC-3.xml
+.idea/workspace-PatrickKasperPC.xml
+.idea/workspace.xml
+*.pyc
