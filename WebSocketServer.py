@@ -28,7 +28,7 @@ class WebSocketServer(tornado.websocket.WebSocketHandler):
     def open(self):
         print "###WebSocket opened"
         self.uuid = str(uuid.uuid4())
-        self.game_list[uuid] = Wikigame.WikiGame(self)
+        self.game_list[uuid] = Wikigame.WikiGame(self, self.uuid)
         self.control_server.broadcast("Opened connection")
 
     def on_message(self, _message):

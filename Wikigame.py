@@ -24,11 +24,13 @@ class WikiGame:
     list_index = 0
     session_id = str(uuid.uuid4())
 
-    def __init__(self, _socket):
+    def __init__(self, _socket, _uuid):
         self.socket = _socket
         self.socket.write_json_message("handshake", str(uuid.uuid4()))
         self.gamelist = WikiGameController.fetch_list(self.gamelist_name)['game_ids'].split(',')
         self.user_controller = User.User(self)
+        self.session_id = _uuid
+        print("STARTING WIKIGAME WITH SESSION ID: " + self.session_id)
 
     def handle_message(self, _message_container):
         if _message_container['type'] == "handshake":
@@ -56,7 +58,6 @@ class WikiGame:
                 self.game_abort()
             elif _message_container['type'] == "screenshot":
                 screenshot_location = self.store_screenshot(_message_container['message'])
-
                 self.store_log(_message_container['game_features']['timestamp'], 'screenshot', screenshot_location)
             elif _message_container['type'] == "link_data":
 
