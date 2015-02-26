@@ -12,6 +12,9 @@ class WebSocketServer(tornado.websocket.WebSocketHandler):
     game_list = dict()
     control_server = ControlServer.ControlServer()
 
+    def check_origin(self, origin):
+        return True
+
     def write_json_message(self, _type, _message):
         message_data = {"type": _type,"timestamp": int(time.time()), "message": _message}
         message_string = json.dumps(message_data)
