@@ -70,7 +70,7 @@ class User:
         self.attributes['played_before'][0] = user_data['played_before']
         self.attributes['played_before'][1] = True
         self.complete = True
-        self.game.game_start()
+        self.game.session_start()
 
     def new_user(self):
         print("NEW USER!")
@@ -95,7 +95,7 @@ class User:
                                     "INSERT")
         database_connection.commit()
 
-        self.game.game_start()
+        self.game.session_start()
 
     def request_feature(self):
         if not self.attributes['name'][1]:

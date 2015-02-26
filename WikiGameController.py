@@ -124,7 +124,7 @@ def fetch_list(_name):
     return gamelist[0]
 
 
-def update_session(_session_id, _gamelist_name, _gamelist_index, _user_id, _completed):
+def update_session(_session_id, _gamelist_name, _gamelist_index, _user_id, _completed, _tutorial_completed, _mission_list):
     exist_check = database_connection.execute("SELECT id "
                                               "FROM gamesessions "
                                               "WHERE session_id = %s "
@@ -134,15 +134,15 @@ def update_session(_session_id, _gamelist_name, _gamelist_index, _user_id, _comp
     print("USER ID: " + _user_id)
     if len(exist_check) != 0:
         sql_statement = "UPDATE gamesessions " \
-                        "SET list_name = %s, list_index = %s, completed = %s " \
+                        "SET list_name = %s, list_index = %s, completed = %s , tutorial_completed = %s, mission_list = %s" \
                         "WHERE session_id = %s " \
                         "LIMIT 1"
-        database_connection.execute(sql_statement, (_gamelist_name, _gamelist_index, _completed, _session_id), "UPDATE")
+        database_connection.execute(sql_statement, (_gamelist_name, _gamelist_index, _completed, _tutorial_completed, _mission_list, _session_id), "UPDATE")
 
     else:
-        sql_statement = "INSERT INTO gamesessions (user_id, list_name, list_index, session_id) " \
-                        "VALUES (%s, %s, %s, %s)"
-        database_connection.execute(sql_statement, (_user_id, _gamelist_name, _gamelist_index, _session_id), "INSERT")
+        sql_statement = "INSERT INTO gamesessions (user_id, list_name, list_index, session_id, tutorial_completed, mission_list) " \
+                        "VALUES (%s, %s, %s, %s, %s, %s)"
+        database_connection.execute(sql_statement, (_user_id, _gamelist_name, _gamelist_index, _session_id, _tutorial_completed, _mission_list), "INSERT")
 
     database_connection.commit()
 
