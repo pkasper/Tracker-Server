@@ -40,6 +40,15 @@ class WikiGame:
         print("STARTING WIKIGAME WITH SESSION ID: " + self.session_id)
 
     def handle_message(self, _message_container):
+        if _message_container['type'] == "DEBUG_RESET":
+            WikiGameController.update_session(self.session_id,
+                                  self.gamelist_name,
+                                  self.list_index,
+                                  self.user_controller.get_attributes()['id'][0],
+                                  True,
+                                  self.tutorial_completed,
+                                  ",".join(self.gamelist))
+            return
         if _message_container['type'] == "handshake":
             self.game_id = _message_container['message']
         elif _message_container['type'] == "start":
@@ -85,6 +94,7 @@ class WikiGame:
             self.gamelist = session_data['mission_list'].split(',')
             self.list_index = session_data['list_index']
             self.user_controller.load_user(session_data['user_id'])
+            self.socket.write_json_message("dialog", {"title": "Restoring game", "text": "Restarting at game" + str(self.list_index + 1) + "/" + str(len(self.gamelist))})
 
         else:
             self.user_controller.new_user()
