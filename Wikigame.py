@@ -116,7 +116,7 @@ class WikiGame:
     def game_start(self):
         if self.list_index >= len(self.gamelist):
             self.socket.write_json_message("session_complete", "Session complete. Thank you!")
-            self.socket.write_json_message("reset", "")
+#            self.socket.write_json_message("reset", "")
             WikiGameController.update_session(self.session_id,
                                               self.gamelist_name,
                                               self.list_index,
