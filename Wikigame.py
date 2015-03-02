@@ -64,7 +64,7 @@ class WikiGame:
                 else:
                     print("Game not started!")
                 return
-            else:
+            elif _message_container['game_features']['game_status']['game_id'] == self.game['game_name']:
                 if _message_container['type'] == "event":
                     self.store_log(_message_container['game_features']['timestamp'], _message_container['message'], _message_container['game_features'])
                     if _message_container['message'] == "load":
@@ -76,6 +76,8 @@ class WikiGame:
                     self.store_log(_message_container['game_features']['timestamp'], 'screenshot', screenshot_location)
                 elif _message_container['type'] == "link_data":
                     self.store_log(_message_container['game_features']['timestamp'], 'link_data', _message_container['message'])
+            else:
+                print("Gamename missmatch")
 
         else:
             print('User not set!')
@@ -94,7 +96,7 @@ class WikiGame:
             self.gamelist = session_data['mission_list'].split(',')
             self.list_index = session_data['list_index']
             self.user_controller.load_user(session_data['user_id'])
-            self.socket.write_json_message("dialog", {"title": "Restoring game", "text": "Restarting at game" + str(self.list_index + 1) + "/" + str(len(self.gamelist))})
+            self.socket.write_json_message("dialog", {"title": "Restoring game", "text": "Restarting at game: " + str(self.list_index + 1) + "/" + str(len(self.gamelist))})
 
         else:
             self.user_controller.new_user()

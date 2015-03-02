@@ -18,6 +18,7 @@ def de_clean_link(_link):
 
 
 def get_distance(_current_page_id, _target_page_id):
+    return 3 # IMPORTANT: This is only a TEMPORARY FIX to improve performance since no distance feedback is provided and all missions have the same initial distance
     sql_statement = "SELECT path_length FROM path_lengths WHERE (page_id = %s) AND (target_page_id = %s) LIMIT 1"
     sql_args = (_current_page_id, _target_page_id)
     sql_result = database_connection.execute(sql_statement, sql_args, "SELECT")
