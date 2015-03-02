@@ -21,10 +21,11 @@ class WebSocketServer(tornado.websocket.WebSocketHandler):
         print(">> " + message_string)
         self.write_message(message_string)
 
-    @staticmethod
     def handle_message(self, _message_package):
 #        print("FORWARDING TO: " + self.uuid)
-
+        if type(_message_package) != type(dict()):
+            print("INVALID INCOMING MESSAGE")
+            return
         self.control_server.broadcast(str(_message_package['type']) + " -> " + str(_message_package['message']))
         self.game_list[self.uuid].handle_message(_message_package)
 
@@ -37,7 +38,7 @@ class WebSocketServer(tornado.websocket.WebSocketHandler):
     def on_message(self, _message):
         print("<< " + _message)
         message_package = json.loads(_message)
-        self.handle_message(self, message_package)
+        self.handle_message(message_package)
 
     def on_close(self):
         print "###WebSocket closed"
