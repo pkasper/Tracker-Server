@@ -149,6 +149,8 @@ def update_session(_session_id, _gamelist_name, _gamelist_index, _user_id, _comp
 
 
 def fetch_session(_session_id):
+    if not _session_id:
+        return False
     session_data = database_connection.execute("SELECT * "
                                                "FROM gamesessions "
                                                "WHERE session_id = %s "
