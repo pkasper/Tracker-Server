@@ -30,6 +30,7 @@ class WikiGame:
     tutorial_data = None
 
     def __init__(self, _socket, _uuid):
+        self.tutorial_data = None
         self.socket = _socket
         self.socket.write_json_message("handshake", str(uuid.uuid4()))
         self.gamelist = WikiGameController.fetch_list(self.gamelist_name)['game_ids'].split(',')
