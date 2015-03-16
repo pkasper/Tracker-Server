@@ -30,7 +30,6 @@ class WikiGame:
     tutorial_data = None
 
     def __init__(self, _socket, _uuid):
-        self.tutorial_data = None
         self.socket = _socket
         self.socket.write_json_message("handshake", str(uuid.uuid4()))
         self.gamelist = WikiGameController.fetch_list(self.gamelist_name)['game_ids'].split(',')
@@ -112,6 +111,7 @@ class WikiGame:
                                           ",".join(self.gamelist))
 
         if not self.tutorial_completed:
+            self.tutorial_data = TutorialData.TutorialData()
             self.tutorial()
         else:
             self.game_start()
@@ -249,7 +249,7 @@ class WikiGame:
 
     def tutorial(self, _message=None):
         if not self.tutorial_data:
-            self.tutorial_data = TutorialData.TutorialData()
+            self.tutorial_data = list(TutorialData.TutorialData())
 
         def next_step(self):
             if len(self.tutorial_data.tutorial_data) == 0:

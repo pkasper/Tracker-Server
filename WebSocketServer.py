@@ -23,6 +23,7 @@ class WebSocketServer(tornado.websocket.WebSocketHandler):
 
     def handle_message(self, _message_package):
 #        print("FORWARDING TO: " + self.uuid)
+
         if type(_message_package) != type(dict()):
             print("INVALID INCOMING MESSAGE")
             return

@@ -4,6 +4,10 @@ class TutorialData:
     tutorial_data = []
 
     def __init__(self):
+        self.setup_tutorial()
+
+    def setup_tutorial(self):
+        self.tutorial_data = []
         self.step("tutorial_welcome",
                   {"type": "tutorial", "message": {"name": 'tutorial_welcome', "type": 'tutorial', "position": {"x": {"alignment": "center", "offset": "0"}, "y": {"alignment": "center", "offset": "0"}}, "arrow_position": "", "title": "WELCOME", "text": "Let's start with a quick tutorial"}},
                   {"type": "tutorial_close", "message": "tutorial_welcome"})
