@@ -2,7 +2,7 @@ import socket
 import sys
 import time
 
-from thread import *
+from _thread import *
 
 
 class ControlServer:
@@ -28,7 +28,7 @@ class ControlServer:
 
         while True:
             connection, address = self.control_socket.accept()
-            print 'Connected with ' + address[0] + ':' + str(address[1])
+            print('Connected with ' + address[0] + ':' + str(address[1]))
             start_new_thread(self.handle_connection, (connection,))
 
         self.control_socket.close()

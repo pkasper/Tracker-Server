@@ -183,7 +183,7 @@ class WikiGame:
             print("Comparison complete")
 
     def store_screenshot(self, _png_data):
-        storepath = "C:\Users\Patrick\Desktop\WIKIGAME_IMAGES" + os.sep
+        storepath = "C:" + os.sep + "Users" + os.sep + "Patrick" + os.sep + "Desktop" + os.sep + "WIKIGAME_IMAGES" + os.sep
 #        print("IMAGE DATA: " + _png_data[22:])
         image_data = a2b_base64(_png_data[22:])
 
@@ -219,7 +219,7 @@ class WikiGame:
 
     def store_log(self, _timestamp, _action, _payload):
         server_timestamp = int(time.time())
-        storepath = "C:\Users\Patrick\Desktop\WIKIGAME_LOG" + os.sep
+        storepath = "C:" + os.sep + "Users" + os.sep + "Patrick" + os.sep + "Desktop" + os.sep + "WIKIGAME_LOG" + os.sep
         log_path = os.path.join(storepath + self.user_controller.attributes['name'][0] + os.sep)
 
         if not os.path.exists(log_path):
@@ -239,7 +239,7 @@ class WikiGame:
         log_file.close()
 
 ##
-#   remove return to disable database logging -> reduces server load!
+#   remove return to enable database logging -> severely increases server load!
 ##
         return
         database_connection.execute("INSERT INTO log (session_id, client_timestamp, server_timestamp, type, payload) "
